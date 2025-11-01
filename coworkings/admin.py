@@ -7,8 +7,8 @@ from coworkings.models import Room, Slot
 @admin.register(Room)
 class RoomAdmin(admin.ModelAdmin):
     list_display = ("number", "city", "limit")
-    list_filter = ("city",)
-    search_fields = ("number",)
+    list_filter = ("type",)
+    search_fields = ("city",)
 
 @admin.register(Slot)
 class SlotAdmin(admin.ModelAdmin):
