@@ -1,396 +1,216 @@
-<!--{% extends 'common.html' %}-->
-
-<!--{% block content %}-->
-<!--    {{ form }}-->
-<!--{% endblock content %}-->
-
-
 <!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Авторизация и регистрация</title>
+    <title>DeskHub - Регистрация</title>
     <style>
-        :root {
-            --primary-color: #4a6fa5;
-            --secondary-color: #6b8cbc;
-            --accent-color: #ff7e5f;
-            --light-color: #f8f9fa;
-            --dark-color: #343a40;
-            --success-color: #28a745;
-            --error-color: #dc3545;
-        }
-
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-
         body {
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
-
-        .container {
-            display: flex;
-            max-width: 900px;
-            width: 100%;
-            background-color: white;
-            border-radius: 10px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
-        }
-
-        .welcome-section {
-            flex: 1;
-            background: linear-gradient(to bottom right, var(--primary-color), var(--secondary-color));
-            color: white;
-            padding: 40px;
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
             display: flex;
             flex-direction: column;
+            min-height: 100vh;
+        }
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem 0;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            display: inline-block;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #FFF;
+            text-decoration: none;
+            padding: 5px;
+            transition: transform 0.3s ease;
+        }
+        .logo:hover {
+            transform: scale(1.2);
+        }
+        .auth-container {
+            flex: 1;
+            display: flex;
             justify-content: center;
             align-items: center;
+            padding: 2rem 0;
+        }
+        .auth-box {
+            width: 100%;
+            max-width: 450px;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        .auth-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
             text-align: center;
+            padding: 2rem 1rem;
         }
-
-        .welcome-section h1 {
-            font-size: 2.5rem;
-            margin-bottom: 20px;
-        }
-
-        .welcome-section p {
-            font-size: 1.1rem;
-            line-height: 1.6;
-        }
-
-        .form-section {
-            flex: 1;
-            padding: 40px;
-        }
-
-        .form-container {
-            width: 100%;
-        }
-
-        .form-toggle {
-            display: flex;
-            margin-bottom: 30px;
-            border-bottom: 1px solid #eaeaea;
-        }
-
-        .toggle-btn {
-            flex: 1;
-            padding: 12px;
-            background: none;
-            border: none;
-            font-size: 1.1rem;
-            font-weight: 600;
-            cursor: pointer;
-            color: var(--dark-color);
-            transition: all 0.3s ease;
-        }
-
-        .toggle-btn.active {
-            color: var(--primary-color);
-            border-bottom: 3px solid var(--primary-color);
-        }
-
-        .form {
-            display: none;
-        }
-
-        .form.active {
-            display: block;
-            animation: fadeIn 0.5s ease;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .form-title {
-            margin-bottom: 25px;
-            color: var(--dark-color);
+        .auth-header h1 {
             font-size: 1.8rem;
+            margin-bottom: 0.5rem;
         }
-
-        .form-group {
-            margin-bottom: 20px;
+        .tabs {
+            display: flex;
+            border-bottom: 1px solid #eee;
         }
-
-        label {
-            display: block;
-            margin-bottom: 8px;
+        .tab {
+            flex: 1;
+            text-align: center;
+            padding: 1.2rem 1rem;
+            cursor: pointer;
+            background: #f8f9fa;
+            color: #666;
             font-weight: 500;
-            color: var(--dark-color);
+            transition: all 0.3s ease;
+            border-top: 2px solid transparent;
         }
-
-        .form-control {
-            width: 100%;
-            padding: 12px 15px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            font-size: 1rem;
-            transition: border-color 0.3s;
+        .tab.active {
+            background: white;
+            color: #667eea;
+            border-bottom: 3px solid #667eea;
+            border-top-color: #667eea;
         }
-
-        .form-control:focus {
-            border-color: var(--primary-color);
-            outline: none;
-            box-shadow: 0 0 0 2px rgba(74, 111, 165, 0.2);
+        .auth-form {
+            padding: 2rem;
         }
-
-        .error-message {
-            color: var(--error-color);
-            font-size: 0.85rem;
-            margin-top: 5px;
-            display: none;
+        .form-group {
+            margin-bottom: 1.5rem;
         }
-
-        .error-message.show {
+        .form-group label {
             display: block;
+            margin-bottom: 0.5rem;
+            color: #555;
+            font-weight: 500;
+            font-size: 0.9rem;
         }
-
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease, transform 0.2s ease;
+        }
+        .form-group input:focus,
+        .form-group select:focus {
+            border-color: #667eea;
+            outline: none;
+            transform: translateY(-1px);
+        }
         .btn {
             width: 100%;
-            padding: 12px;
-            background-color: var(--primary-color);
+            padding: 1rem;
+            background: #667eea;
             color: white;
             border: none;
-            border-radius: 5px;
+            border-radius: 8px;
             font-size: 1rem;
             font-weight: 600;
             cursor: pointer;
-            transition: background-color 0.3s;
+            transition: background 0.3s ease, transform 0.2s ease;
         }
-
         .btn:hover {
-            background-color: var(--secondary-color);
+            background: #5a67d8;
+            transform: translateY(-2px);
         }
-
-        .form-footer {
-            margin-top: 20px;
+        .switch-link {
             text-align: center;
-            font-size: 0.9rem;
-            color: #666;
-        }
-
-        .form-footer a {
-            color: var(--primary-color);
+            margin-top: 1.5rem;
+            color: #667eea;
             text-decoration: none;
+            font-size: 0.9rem;
+            display: block;
+            transition: color 0.3s ease;
         }
-
-        .form-footer a:hover {
+        .switch-link:hover {
+            color: #764ba2;
             text-decoration: underline;
         }
-
-        @media (max-width: 768px) {
-            .container {
-                flex-direction: column;
-            }
-
-            .welcome-section {
-                padding: 30px 20px;
-            }
-
-            .form-section {
-                padding: 30px 20px;
-            }
+        footer {
+            background: #2d3748;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: auto;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="welcome-section">
-            <h1>Добро пожаловать!</h1>
-            <p>Войдите в свой аккаунт или создайте новый, чтобы получить доступ ко всем возможностям нашего сервиса.</p>
+    <header>
+        <div class="container header-content">
+            <a href="/" class="logo">DeskHub</a>
         </div>
+    </header>
 
-        <div class="form-section">
-            <div class="form-container">
-                <div class="form-toggle">
-                    <button class="toggle-btn active" data-form="login">Вход</button>
-                    <button class="toggle-btn" data-form="register">Регистрация</button>
-                </div>
-
-                <!-- Форма авторизации -->
-                <form id="login-form" class="form active">
-                    <h2 class="form-title">Вход в аккаунт</h2>
-
-                    <div class="form-group">
-                        <label for="login-username">Имя пользователя</label>
-                        <input type="text" id="login-username" class="form-control" required>
-                        <div class="error-message" id="login-username-error">Поле не может быть меньше 3 символов</div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="login-password">Пароль</label>
-                        <input type="password" id="login-password" class="form-control" required>
-                        <div class="error-message" id="login-password-error">Пароль не может быть меньше 8 символов</div>
-                    </div>
-
-                    <button type="submit" class="btn">Войти</button>
-
-                    <div class="form-footer">
-                        <p>Нет аккаунта? <a href="#" id="switch-to-register">Зарегистрируйтесь</a></p>
-                    </div>
-                </form>
-
-                <!-- Форма регистрации -->
-                <form id="register-form" class="form">
-                    <h2 class="form-title">Создание аккаунта</h2>
-
-                    <div class="form-group">
-                        <label for="register-username">Имя пользователя</label>
-                        <input type="text" id="register-username" class="form-control" required>
-                        <div class="error-message" id="register-username-error">Поле не может быть меньше 3 символов</div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="register-password1">Пароль</label>
-                        <input type="password" id="register-password1" class="form-control" required>
-                        <div class="error-message" id="register-password1-error">Пароль не может быть меньше 8 символов</div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="register-password2">Подтверждение пароля</label>
-                        <input type="password" id="register-password2" class="form-control" required>
-                        <div class="error-message" id="register-password2-error">Пароли не совпадают</div>
-                    </div>
-
-                    <button type="submit" class="btn">Зарегистрироваться</button>
-
-                    <div class="form-footer">
-                        <p>Уже есть аккаунт? <a href="#" id="switch-to-login">Войдите</a></p>
-                    </div>
-                </form>
+    <div class="auth-container">
+        <div class="auth-box">
+            <div class="auth-header">
+                <h1>Добро пожаловать!</h1>
+                <p>Войдите в свой аккаунт</p>
             </div>
+
+
+            <!-- Форма входа -->
+            <form id="login" class="auth-form">
+                <div class="form-group">
+                    <label for="loginEmail">Email</label>
+                    <input type="email" id="loginEmail" placeholder="example@email.com" required>
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">Пароль</label>
+                    <input type="password" id="loginPassword" placeholder="password" required>
+                </div>
+                <button type="submit" class="btn">Войти</button>
+                <a href="#" class="switch-link" onclick="showTab('register')">Нет аккаунта? Зарегистрироваться</a>
+            </form>
+
+            <!-- Форма регистрации -->
+            <form id="register" class="auth-form" style="display: none;">
+                <div class="form-group">
+                    <label for="registerName">Имя и фамилия</label>
+                    <input type="text" id="registerName" placeholder="Иван Иванов" required>
+                </div>
+                <div class="form-group">
+                    <label for="registerEmail">Email</label>
+                    <input type="email" id="registerEmail" placeholder="ваш@email.com" required>
+                </div>
+                <div class="form-group">
+                    <label for="registerPassword">Пароль</label>
+                    <input type="password" id="registerPassword" placeholder="Не менее 8 символов" required>
+                </div>
+                <div class="form-group">
+                    <label for="confirmPassword">Подтвердите пароль</label>
+                    <input type="password" id="confirmPassword" placeholder="Повторите пароль" required>
+                </div>
+                <button type="submit" class="btn">Создать аккаунт</button>
+                <a href="#" class="switch-link" onclick="showTab('login')">Уже есть аккаунт? Войти</a>
+            </form>
         </div>
     </div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Переключение между формами
-            const toggleBtns = document.querySelectorAll('.toggle-btn');
-            const forms = document.querySelectorAll('.form');
-            const switchToRegister = document.getElementById('switch-to-register');
-            const switchToLogin = document.getElementById('switch-to-login');
-
-            toggleBtns.forEach(btn => {
-                btn.addEventListener('click', function() {
-                    const formId = this.getAttribute('data-form');
-
-                    // Обновляем активные кнопки
-                    toggleBtns.forEach(b => b.classList.remove('active'));
-                    this.classList.add('active');
-
-                    // Показываем соответствующую форму
-                    forms.forEach(form => {
-                        form.classList.remove('active');
-                        if (form.id === `${formId}-form`) {
-                            form.classList.add('active');
-                        }
-                    });
-                });
-            });
-
-            switchToRegister.addEventListener('click', function(e) {
-                e.preventDefault();
-                document.querySelector('[data-form="register"]').click();
-            });
-
-            switchToLogin.addEventListener('click', function(e) {
-                e.preventDefault();
-                document.querySelector('[data-form="login"]').click();
-            });
-
-            // Валидация форм
-            const loginForm = document.getElementById('login-form');
-            const registerForm = document.getElementById('register-form');
-
-            // Валидация формы авторизации
-            loginForm.addEventListener('submit', function(e) {
-                e.preventDefault();
-                let isValid = true;
-
-                const username = document.getElementById('login-username');
-                const password = document.getElementById('login-password');
-                const usernameError = document.getElementById('login-username-error');
-                const passwordError = document.getElementById('login-password-error');
-
-                // Сброс сообщений об ошибках
-                usernameError.classList.remove('show');
-                passwordError.classList.remove('show');
-
-                // Проверка имени пользователя
-                if (username.value.length < 3) {
-                    usernameError.classList.add('show');
-                    isValid = false;
-                }
-
-                // Проверка пароля
-                if (password.value.length < 8) {
-                    passwordError.classList.add('show');
-                    isValid = false;
-                }
-
-                if (isValid) {
-                    // Здесь обычно отправка формы на сервер
-                    alert('Форма авторизации отправлена!');
-                    // loginForm.submit();
-                }
-            });
-
-            // Валидация формы регистрации
-            registerForm.addEventListener('submit', function(e) {
-                e.preventDefault();
-                let isValid = true;
-
-                const username = document.getElementById('register-username');
-                const password1 = document.getElementById('register-password1');
-                const password2 = document.getElementById('register-password2');
-                const usernameError = document.getElementById('register-username-error');
-                const password1Error = document.getElementById('register-password1-error');
-                const password2Error = document.getElementById('register-password2-error');
-
-                // Сброс сообщений об ошибках
-                usernameError.classList.remove('show');
-                password1Error.classList.remove('show');
-                password2Error.classList.remove('show');
-
-                // Проверка имени пользователя
-                if (username.value.length < 3) {
-                    usernameError.classList.add('show');
-                    isValid = false;
-                }
-
-                // Проверка пароля
-                if (password1.value.length < 8) {
-                    password1Error.classList.add('show');
-                    isValid = false;
-                }
-
-                // Проверка подтверждения пароля
-                if (password1.value !== password2.value) {
-                    password2Error.classList.add('show');
-                    isValid = false;
-                }
-
-                if (isValid) {
-                    // Здесь обычно отправка формы на сервер
-                    alert('Форма регистрации отправлена!');
-                    // registerForm.submit();
-                }
-            });
-        });
-    </script>
-</body>
-</html>
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Коворкинг‑Платформа. Все права защищены.
