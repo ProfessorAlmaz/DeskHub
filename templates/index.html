@@ -2,9 +2,175 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Главная страница</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DeskHub</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem;
+        }
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 600;
+        }
+        .auth-button {
+            padding: 0.7rem 1.5rem;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: background-color 0.3s;
+        }
+        .auth-button:hover {
+            background: white;
+            color: #667eea;
+        }
+        .search-form {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            margin: -40px auto 3rem;
+            max-width: 800px;
+        }
+        .form-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        .form-group input, .form-group select, .form-group button {
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 1rem;
+        }
+        .form-group button {
+            background: #667eea;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .form-group button:hover {
+            background: #5a67d8;
+        }
+        .features {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            margin: 3rem 0;
+        }
+        .feature-card {
+            background: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            width: 300px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            margin: 1rem;
+        }
+
+        .logo {
+            display: inline-block;
+            font-family: 'Arial', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #FFF;
+            text-decoration: none; /* Убираем подчёркивание */
+            padding: 5px;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.2);
+            text-decoration: underline;
+            text-decoration: none;
+        }
+
+        footer {
+            background: #2d3748;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+        }
+    </style>
 </head>
 <body>
-    <h1>Hello World!</h1>
+    <header>
+        <div class="container header-content">
+            <a href="/main" class="logo">DeskHub</a>
+            <button class="auth-button" onclick="window.location.href='/registration'">
+                Войти
+            </button>
+        </div>
+    </header>
+
+    <main class="container">
+        <form class="search-form">
+            <h2 style="text-align: center; margin-bottom: 5rem;">Поиск свободного места</h2>
+            <div class="form-group">
+                <input type="text" placeholder="Город" required>
+                <select>
+                    <option value="">Любой тип места</option>
+                    <option value="desk">Рабочее место</option>
+                    <option value="meeting">Переговорная</option>
+                </select>
+                <input type="date" required>
+                <button type="submit">Найти места</button>
+            </div>
+        </form>
+
+        <section class="features">
+            <div class="feature-card">
+                <h3>Широкий выбор</h3>
+                <p>Более 1 000 коворкингов по всей стране. Разные форматы и ценовые категории.</p>
+            </div>
+            <div class="feature-card">
+                <h3>Онлайн‑бронирование</h3>
+                <p>Бронируйте места в пару кликов. Мгновенное подтверждение бронирования.</p>
+            </div>
+            <div class="feature-card">
+                <h3>Отзывы и рейтинги</h3>
+                <p>Читайте реальные отзывы других пользователей и выбирайте лучшие места.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Коворкинг‑Платформа. Все права защищены.</p>
+            <p><a href="#" style="color: white;">О нас</a> | <a href="#" style="color: white;">Помощь</a> | <a href="#" style="color: white;">Контакты</a></p>
+        </div>
+    </footer>
 </body>
 </html>
+
+

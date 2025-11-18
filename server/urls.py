@@ -17,10 +17,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
-from coworkings.views import main_page, register_page
+from coworkings.views import main_page, registration_page
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('coworkings.urls')),
-    path('register/', register_page, name="register-page"),
+    # path('register/', register_page, name="register-page"),
 ]
