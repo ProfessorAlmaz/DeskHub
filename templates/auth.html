@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DeskHub - Регистрация</title>
+    <title>DeskHub - Авторизация</title>
     <style>
         * {
             margin: 0;
@@ -46,14 +46,14 @@
         .logo:hover {
             transform: scale(1.2);
         }
-        .register-container {
+        .auth-container {
             flex: 1;
             display: flex;
             justify-content: center;
             align-items: center;
             padding: 2rem 0;
         }
-        .register-box {
+        .auth-box {
             width: 100%;
             max-width: 450px;
             background: white;
@@ -61,17 +61,38 @@
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
             overflow: hidden;
         }
-        .register-header {
+        .auth-header {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
             text-align: center;
             padding: 2rem 1rem;
         }
-        .register-header h1 {
+        .auth-header h1 {
             font-size: 1.8rem;
             margin-bottom: 0.5rem;
         }
-        .register-form {
+        .tabs {
+            display: flex;
+            border-bottom: 1px solid #eee;
+        }
+        .tab {
+            flex: 1;
+            text-align: center;
+            padding: 1.2rem 1rem;
+            cursor: pointer;
+            background: #f8f9fa;
+            color: #666;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border-top: 2px solid transparent;
+        }
+        .tab.active {
+            background: white;
+            color: #667eea;
+            border-bottom: 3px solid #667eea;
+            border-top-color: #667eea;
+        }
+        .auth-form {
             padding: 2rem;
         }
         .form-group {
@@ -84,7 +105,8 @@
             font-weight: 500;
             font-size: 0.9rem;
         }
-        .form-group input {
+        .form-group input,
+        .form-group select {
             width: 100%;
             padding: 0.75rem;
             border: 1px solid #ddd;
@@ -92,7 +114,8 @@
             font-size: 1rem;
             transition: border-color 0.3s ease, transform 0.2s ease;
         }
-        .form-group input:focus {
+        .form-group input:focus,
+        .form-group select:focus {
             border-color: #667eea;
             outline: none;
             transform: translateY(-1px);
@@ -113,7 +136,7 @@
             background: #5a67d8;
             transform: translateY(-2px);
         }
-        .login-link {
+        .switch-link {
             text-align: center;
             margin-top: 1.5rem;
             color: #667eea;
@@ -122,7 +145,7 @@
             display: block;
             transition: color 0.3s ease;
         }
-        .login-link:hover {
+        .switch-link:hover {
             color: #764ba2;
             text-decoration: underline;
         }
@@ -142,37 +165,26 @@
         </div>
     </header>
 
-    <div class="register-container">
-        <div class="register-box">
-            <div class="register-header">
-                <h1>Создайте аккаунт</h1>
-                <p>Начните бронировать рабочие места уже сегодня</p>
+    <div class="auth-container">
+        <div class="auth-box">
+            <div class="auth-header">
+                <h1>Добро пожаловать!</h1>
+                <p>Войдите в свой аккаунт</p>
             </div>
 
-            <form class="register-form" action="#" method="POST">
+
+            <!-- Форма входа -->
+            <form id="login" class="auth-form">
                 <div class="form-group">
-                    <label for="fullName">Имя и фамилия</label>
-                    <input type="text" id="fullName" name="fullName" placeholder="Иван Иванов" required>
+                    <label for="loginEmail">Email</label>
+                    <input type="email" id="loginEmail" placeholder="example@email.com" required>
                 </div>
-
                 <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" name="email" placeholder="ваш@email.com" required>
+                    <label for="loginPassword">Пароль</label>
+                    <input type="password" id="loginPassword" placeholder="password" required>
                 </div>
-
-                <div class="form-group">
-                    <label for="password">Пароль</label>
-                    <input type="password" id="password" name="password" placeholder="Не менее 8 символов" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="confirmPassword">Подтвердите пароль</label>
-                    <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Повторите пароль" required>
-                </div>
-
-                <button type="submit" class="btn">Создать аккаунт</button>
-
-                <a href="/auth" class="login-link">Уже есть аккаунт? Войти</a>
+                <button type="submit" class="btn">Войти</button>
+                <a href="/registration" class="switch-link" onclick="showTab('register')">Нет аккаунта? Зарегистрироваться</a>
             </form>
         </div>
     </div>
@@ -187,5 +199,3 @@
             </p>
         </div>
     </footer>
-</body>
-</html>

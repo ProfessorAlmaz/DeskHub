@@ -7,6 +7,14 @@ def main_page(request: HttpRequest):
     return render(request, 'index.html')
 
 
+def auth_page(request: HttpRequest):
+    form = UserCreationForm()
+    return render(
+        request,
+        "auth.html",
+        context={"form": form}
+    )
+
 def registration_page(request: HttpRequest):
     form = UserCreationForm()
     return render(
