@@ -22,3 +22,11 @@ def registration_page(request: HttpRequest):
         "registration.html",
         context={"form": form}
     )
+
+def profile_page(request: HttpRequest):
+    form = UserCreationForm()
+    return render(
+        request,
+        "profile.html",
+        context={"form": form}
+    )

@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DeskHub - Личный профиль</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem 0;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+        }
+        .logo {
+            display: inline-block;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #FFF;
+            text-decoration: none;
+            padding: 5px;
+            transition: transform 0.3s ease;
+        }
+        .logo:hover {
+            transform: scale(1.2);
+        }
+        .user-panel {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        .avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: #667eea;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        .user-name {
+            font-weight: 600;
+            color: white;
+        }
+        .main-content {
+            flex: 1;
+            padding: 2rem 0;
+        }
+        .profile-layout {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        .search-section, .cart-section {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+        }
+        h2 {
+            margin-bottom: 1.5rem;
+            color: #444;
+            border-bottom: 2px solid #667eea;
+            padding-bottom: 0.5rem;
+            font-size: 1.4rem;
+        }
+        /* Форма поиска */
+        .search-form {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        .search-form input,
+        .search-form select {
+            flex: 1;
+            min-width: 0;
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s, transform 0.2s;
+        }
+        .search-form input:focus,
+        .search-form select:focus {
+            border-color: #667eea;
+            outline: none;
+            transform: translateY(-1px);
+        }
+        .search-btn {
+            padding: 0.75rem 1.5rem;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: background 0.3s, transform 0.2s;
+        }
+        .search-btn:hover {
+            background: #5a67d8;
+            transform: translateY(-2px);
+        }
+        /* Результаты поиска */
+        .results-list {
+            border: 1px solid #eee;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .result-item {
+            padding: 1.2rem;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background 0.2s;
+        }
+        .result-item:hover {
+            background-color: #f8f9fa;
+        }
+        .result-item:last-child {
+            border-bottom: none;
+        }
+        .place-info {
+            max-width: 60%;
+        }
+        .place-title {
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+        }
+        .place-address {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        .price {
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+        .book-btn {
+            padding: 0.6rem 1.2rem;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: background 0.3s, transform 0.1s;
+        }
+        .book-btn:hover {
+            background: #5a67d8;
+            transform: scale(1.05);
+        }
+        /* Корзина */
+        .cart-item {
+            padding: 1rem;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .cart-item:last-child {
+            border-bottom: none;
+        }
+        .cart-place {
+            font-weight: 600;
+        }
+        .cart-price {
+            font-weight: 700;
+        }
+        .remove-btn {
+            color: #e53e3e;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+        .remove-btn:hover {
+            color: #c53030;
+        }
+        .total {
+            text-align: right;
+            margin: 1.5rem 0 1rem;
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: #333;
+        }
+        .checkout-btn {
+            width: 100%;
+            padding: 1rem;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: background 0.3s, transform 0.2s;
+        }
+        .checkout-btn:hover {
+            background: #5a67d8;
+            transform: translateY(-2px);
+        }
+        footer {
+            background: #2d3748;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: auto;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="/" class="logo">DeskHub</a>
+                <div class="user-panel">
+                    <div class="avatar">И</div>
+                    <span class="user-name">Иван Иванов</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="container">
+            <div class="profile-layout">
+                <!-- Контейнер поиска и бронирования -->
+                <section class="search-section">
+                    <h2>Поиск и бронирование рабочих мест</h2>
+                    <form class="search-form">
+                        <input type="text" placeholder="Город">
+                        <select>
+                            <option value="">Любой тип места</option>
+                            <option value="desk">Рабочее место</option>
+                            <option value="meeting">Переговорная</option>
+                        </select>
+                        <input type="date">
+                        <button type="submit" class="search-btn">Найти места</button>
+                    </form>
+
+
+                </section>
+
+                <!-- Корзина -->
+                <aside class="cart-section">
+                    <h2>Ваша корзина</h2>
+
+                    <div class="total">Корзина пуста</div>
+                    <button class="checkout-btn">Перейти к оплате</button>
+                </aside>
+            </div>
+        </div>
+    </main>
+
+    <<footer>
+        <div class="container">
+            <p>&copy; 2025 Коворкинг‑Платформа. Все права защищены.</p>
+            <p><a href="#" style="color: white;">О нас</a> | <a href="#" style="color: white;">Помощь</a> | <a href="#" style="color: white;">Контакты</a></p>
+        </div>
+    </footer>
+</body>
+</html>
