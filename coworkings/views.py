@@ -26,18 +26,17 @@ def registration_page(request: HttpRequest):
             login(request, user)
             return render(request, "profile.html", context={"user": user})
         else:
-            form = CustomUserCreationForm()
             return render(
                 request,
                 "registration.html",
-                context={"form": form, "error" : form.errors}
+                context={"form": form, "errors": form.errors}
             )
     else:
         form = CustomUserCreationForm()
         return render(
             request,
             "registration.html",
-            context={"form": form, "error" : ""}
+            context={"form": form, "errors": {}}
         )
 
 def profile_page(request: HttpRequest):

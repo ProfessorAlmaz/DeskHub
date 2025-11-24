@@ -5,17 +5,28 @@ from coworkings.models import User
 
 
 class CustomUserCreationForm(UserCreationForm):
+    fullname = forms.CharField(
+        label='Имя и фамилия',
+        max_length=150,
+        required=True,
+        widget=forms.TextInput(attrs={'placeholder': 'Иван Иванов'})
+    )
+    email = forms.EmailField(
+        label='Email',
+        required=True,
+        widget=forms.EmailInput(attrs={'placeholder': 'ваш@email.com'})
+    )
+
     class Meta(UserCreationForm.Meta):
         model = User
-        fields = ('username', 'fullname', 'email')
+        fields = ('username', 'fullname', 'email', 'password1', 'password2')
 
-    def cleaned_password2(self):
+    def clean_password2(self):
         pass1 = self.cleaned_data.get("password1")
         pass2 = self.cleaned_data.get("password2")
-        if pass1==pass2:
-            return pass1
-        else:
-            return forms.ValidationError('Пароли не совпадают')
+        if pass1 and pass2 and pass1 != pass2:
+            raise forms.ValidationError('Пароли не совпадают')
+        return pass2
 
 
 class UserAuthForm(forms.Form):

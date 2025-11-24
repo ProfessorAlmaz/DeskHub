@@ -21,12 +21,19 @@ class Slot(models.Model):
     start_time = models.DateTimeField(verbose_name='Время начала')
     end_time = models.DateTimeField(verbose_name='Время конца')
 
+    def room_number(self):
+        return self.room.number
+    room_number.short_description = 'Номер комнаты'
+
+    def __str__(self):
+        return f"Слот {self.room.number} ({self.start_time} - {self.end_time})"
+
     class Meta:
         verbose_name = 'Слот'
         verbose_name_plural = 'Слоты'
 
 class User(UserModel):
-    fullname = models.CharField(verbose_name='Имя и фамилия')
+    fullname = models.CharField(max_length=150, verbose_name='Имя и фамилия')
 
     class Meta:
         verbose_name = 'Пользователь'

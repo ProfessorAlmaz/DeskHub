@@ -149,33 +149,56 @@
                 <p>Начните бронировать рабочие места уже сегодня</p>
             </div>
 
-            <p>{{error}}</p>
+            {% if errors %}
+                <div style="padding: 1rem 2rem; background-color: #fee; color: #c33; border-bottom: 1px solid #fcc;">
+                    {% for field, error_list in errors.items %}
+                        {% for error in error_list %}
+                            <p style="margin: 0.25rem 0;">{{ error }}</p>
+                        {% endfor %}
+                    {% endfor %}
+                </div>
+            {% endif %}
 
-            <form class="register-form" action="#" method="POST">
+            <form class="register-form" action="{% url 'registration-page' %}" method="POST">
                 {% csrf_token %}
                 <div class="form-group">
                     <label for="username">Никнейм</label>
                     <input type="text" id="username" name="username" placeholder="Ник" required>
+                    {% if errors.username %}
+                        <div style="color: red; font-size: 0.85rem; margin-top: 0.25rem;">{{ errors.username }}</div>
+                    {% endif %}
                 </div>
 
                 <div class="form-group">
-                    <label for="fullName">Имя и фамилия</label>
-                    <input type="text" id="fullName" name="fullName" placeholder="Иван Иванов" required>
+                    <label for="fullname">Имя и фамилия</label>
+                    <input type="text" id="fullname" name="fullname" placeholder="Иван Иванов" required>
+                    {% if errors.fullname %}
+                        <div style="color: red; font-size: 0.85rem; margin-top: 0.25rem;">{{ errors.fullname }}</div>
+                    {% endif %}
                 </div>
 
                 <div class="form-group">
                     <label for="email">Email</label>
                     <input type="email" id="email" name="email" placeholder="ваш@email.com" required>
+                    {% if errors.email %}
+                        <div style="color: red; font-size: 0.85rem; margin-top: 0.25rem;">{{ errors.email }}</div>
+                    {% endif %}
                 </div>
 
                 <div class="form-group">
                     <label for="password">Пароль</label>
                     <input type="password" id="password" name="password1" placeholder="Не менее 8 символов" required>
+                    {% if errors.password1 %}
+                        <div style="color: red; font-size: 0.85rem; margin-top: 0.25rem;">{{ errors.password1 }}</div>
+                    {% endif %}
                 </div>
 
                 <div class="form-group">
                     <label for="confirmPassword">Подтвердите пароль</label>
                     <input type="password" id="confirmPassword" name="password2" placeholder="Повторите пароль" required>
+                    {% if errors.password2 %}
+                        <div style="color: red; font-size: 0.85rem; margin-top: 0.25rem;">{{ errors.password2 }}</div>
+                    {% endif %}
                 </div>
 
                 <button type="submit" class="btn">Создать аккаунт</button>

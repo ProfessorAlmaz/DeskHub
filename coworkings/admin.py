@@ -12,5 +12,5 @@ class RoomAdmin(admin.ModelAdmin):
 
 @admin.register(Slot)
 class SlotAdmin(admin.ModelAdmin):
-    list_display = ("start_time", "end_time", "room__number")
+    list_display = ("start_time", "end_time", "room_number", "room")
     search_fields = ("room__number",)
