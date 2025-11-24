@@ -152,6 +152,7 @@
             <p>{{error}}</p>
 
             <form class="register-form" action="#" method="POST">
+                {% csrf_token %}
                 <div class="form-group">
                     <label for="username">Никнейм</label>
                     <input type="text" id="username" name="username" placeholder="Ник" required>
