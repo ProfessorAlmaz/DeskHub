@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import AbstractUser as UserModel
 
 class Room(models.Model):
     DESK = 'desk'
@@ -23,3 +24,10 @@ class Slot(models.Model):
     class Meta:
         verbose_name = 'Слот'
         verbose_name_plural = 'Слоты'
+
+class User(UserModel):
+    fullname = models.CharField(verbose_name='Имя и фамилия')
+
+    class Meta:
+        verbose_name = 'Пользователь'
+        verbose_name_plural = 'Пользователи'

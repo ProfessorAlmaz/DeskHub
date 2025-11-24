@@ -1,12 +1,22 @@
 from django.contrib.auth.forms import UserCreationForm
 from django import forms
 
+from coworkings.models import User
+
+
 class CustomUserCreationForm(UserCreationForm):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        for field in self.fields.values():
-            field.widget.attrs['class'] = 'forms-control'
-            field.help_text = None
+    class Meta(UserCreationForm.Meta):
+        model = User
+        fields = ('username', 'fullname', 'email')
+
+    def cleaned_password2(self):
+        pass1 = self.cleaned_data.get("password1")
+        pass2 = self.cleaned_data.get("password2")
+        if pass1==pass2:
+            return pass1
+        else:
+            return forms.ValidationError('Пароли не совпадают')
+
 
 class UserAuthForm(forms.Form):
     username = forms.CharField(
